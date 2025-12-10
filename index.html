@@ -1,90 +1,151 @@
--- 25L-2058.sql
--- Lab Manual Lab 7 - DDL & DML
--- FAST NUCES Lahore
+<html>
+<head>
+<title>Task 04</title>
+<style>
+body {
+  font-family: Verdana, sans-serif;
+  margin: 0;
+  padding: 30px;
+  background-color: #d7e9ec;
+}
 
-CREATE DATABASE LAB_07;
-USE LAB_07;
+#container {
+  width: 800px;
+  margin: 0 auto;
+  background-color: #ffffff;
+  border: 2px solid #c0d8dd;
+  padding: 15px;
+}
 
-CREATE TABLE Student_Table4 
-(
-    RollNum VARCHAR(25) PRIMARY KEY,
-    Name NVARCHAR(25) NOT NULL,
-    Gender NVARCHAR(25),
-    Phone NVARCHAR(25)
-);
+/* header */
+#header {
+  border-bottom: 2px solid #c0d8dd;
+  padding: 10px 15px;
+}
+#header h1 {
+  margin: 0;
+  color: #44a5a5;
+  text-align: right;
+  font-size: 28px;
+}
+#header h2 {
+  margin: 0;
+  color: #63c1c1;
+  text-align: right;
+  font-size: 14px;
+}
 
-INSERT INTO Student_Table4 VALUES
-('L230844', 'Ahmed Muaz', 'Male', '0333-3333333'),
-('L124147', 'Kalsoom', 'Female', '0333-3456789'),
-('L230654', 'Sabih Ud Din', 'Male', '0345-3243567');
+/* sidebar */
+#sidebar {
+  float: left;
+  width: 180px;
+  background-color: #4ec3c3;
+  padding: 10px;
+  box-sizing: border-box;
+  font-weight: bold;
+  color: #ffffff;
+}
+#sidebar ul {
+  padding-left: 18px;
+  margin-top: 8px;
+}
+#sidebar a {
+  color: #0b3d3d;
+  text-decoration: none;
+}
 
-CREATE TABLE Teacher_Table4
-(
-    Id INT PRIMARY KEY,
-    Name NVARCHAR(25) NOT NULL,
-    Designation NVARCHAR(25),
-    Department NVARCHAR(25)
-);
+/* main */
+#main {
+  margin-left: 200px;
+  padding: 10px 10px 20px 20px;
+}
 
-INSERT INTO Teacher_Table4 VALUES
-(1, 'Dr. Zeeshan Ali Rana', 'Assistant Prof.', 'Software Engineering'),
-(2, 'Mr. Zeeshan Nazar', 'Lecturer', 'Data Science'),
-(3, 'Mamoona Majid', 'Lecturer', 'Computer Science');
+/* entries */
+.entry {
+  background-color: #f4ffff;
+  border: 1px solid #c0d8dd;
+  margin-bottom: 15px;
+  padding: 10px;
+  display: flex;
+  align-items: flex-start;
+}
+.entry-date {
+  width: 160px;
+  color: #44a5a5;
+  font-weight: bold;
+}
+.entry-text {
+  flex: 1;
+  font-size: 13px;
+}
+.entry img {
+  width: 120px;
+  height: auto;
+  margin-left: 15px;
+}
+.quote {
+  font-style: italic;
+}
 
-CREATE TABLE ClassVenue_Table 
-(
-    Id INT PRIMARY KEY,
-    Building NVARCHAR(25),
-    RoomNum INT,
-    TeacherId INT FOREIGN KEY REFERENCES Teacher_Table4(Id)
-);
+/* footer */
+#footer {
+  clear: both;
+  padding-top: 10px;
+  font-size: 11px;
+  color: #666;
+}
+</style>
+</head>
+<body>
 
-INSERT INTO ClassVenue_Table VALUES
-(1, 'CS', 2, 1),
-(2, 'Civil', 7, 2);
+<div id="container">
 
-CREATE TABLE Attendance_Table4
-(
-    RollNum VARCHAR(25) FOREIGN KEY REFERENCES Student_Table4(RollNum),
-    ClassDate DATE,
-    Status CHAR(1),
-    VenueId INT FOREIGN KEY REFERENCES ClassVenue_Table(Id),
-    PRIMARY KEY (RollNum, ClassDate)
-);
+  <div id="header">
+    <h1>Victoria's Journal</h1>
+    <h2>So fresh and so clean</h2>
+  </div>
 
-INSERT INTO Attendance_Table4 VALUES
-('L230844', '2016-02-22', 'P', 2),
-('L124147', '2016-02-23', 'A', 1),
-('L230654', '2016-03-04', 'P', 2);
+  <div id="sidebar">
+    Friends
+    <ul>
+      <li><a href="#">JRD Bulletin</a></li>
+      <li><a href="#">Reg Wall</a></li>
+      <li><a href="#">Conan the Librarian</a></li>
+    </ul>
+  </div>
 
-INSERT INTO Student_Table4 VALUES ('L162334', 'Fozan Shahid', 'Male', '0333-9999999');
+  <div id="main">
 
-INSERT INTO ClassVenue_Table VALUES (3, 'CS', 5, 1);
+    <div class="entry">
+      <div class="entry-date">04/09/08: Spatulas</div>
+      <div class="entry-text">
+        Yesterday, I went to the store and got some much needed spatulas!
+        (What better way to say I love myself than to buy myself a spatula?)
+      </div>
+      <img src="https://images.unsplash.com/photo-1518131678677-bc1a4dca4ccb?auto=format&fit=crop&w=200&q=80"
+           alt="Spatula">
+    </div>
 
-UPDATE Teacher_Table4
-SET Name = 'Ms. Mamoona Majid'
-WHERE Name = 'Mamoona Majid';
+    <div class="entry">
+      <div class="entry-date">04/08/08: Cookie Cupcakes</div>
+      <div class="entry-text">
+        My favorite cartoon character is cookie, and my favorite dessert is cupcakes.
+        So Cookie Cupcakes are best of both the worlds.<br><br>
+        <span class="quote">
+          "Sometimes me think what is love, and then me think love is what cookie is for.
+          Me give up the last cookie for you."
+        </span><br><br>
+        I wonder if the same applies for the cupcakes? (If so, I don't think I can ever love ANYONE!)
+      </div>
+      <img src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&w=200&q=80"
+           alt="Cupcakes">
+    </div>
 
-DELETE FROM Student_Table4 WHERE RollNum = 'L162334';
+  </div>
 
-INSERT INTO Student_Table4 VALUES ('L164123', 'Ali Raza', 'Male', '0333-8888888');
-DELETE FROM Student_Table4 WHERE RollNum = 'L164123';
+  <div id="footer">| FAST School of Computing</div>
 
-INSERT INTO Attendance_Table4 VALUES ('L164124', '2016-03-05', 'A', 1);
-DELETE FROM Attendance_Table4 WHERE RollNum = 'L164124' AND Status = 'A';
+</div>
 
-SELECT Name FROM Student_Table4
-WHERE Gender = 'Male' AND Phone LIKE '03%';
-
-SELECT Name FROM Teacher_Table4
-WHERE Department = 'Computer Science' OR Designation = 'Professor';
-
-SELECT * FROM Student_Table4
-WHERE Gender <> 'Female';
-
-SELECT Name FROM Teacher_Table4
-WHERE Designation = 'Assistant Prof.' AND Department <> 'Mathematics';
-
-SELECT * FROM Student_Table4
-WHERE RollNum > '1000' OR Name LIKE 'A%';
-
+</body>
+</html>
